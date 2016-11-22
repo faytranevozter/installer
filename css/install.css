@@ -1,0 +1,113 @@
+@import url('gfonts.css');
+
+* {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html, body {
+	background-image: linear-gradient(to bottom left, #43cea2 0%, #185a9d 100%);
+	height: 100%;
+	font-family: 'Open Sans';
+}
+
+.kick-right {float: right;}
+.kick-left {float: left;}
+
+.hide {display: none;}
+
+.test-box {
+	position: absolute;
+	width: 500px;
+	left: 50%;
+	margin-left: -250px;
+	top: 7%;
+	background-image: linear-gradient(to bottom left, #43cea2 0%, #185a9d 100%);
+	padding: 20px;
+	border-radius: 3px;
+	border: 1px solid #616161;
+	-webkit-box-shadow: 2px 4px 1px #212121;
+	box-shadow: 2px 4px 1px #212121;
+}
+
+.text-form {
+	display: block;
+	width: 100%;
+	font-size: 14px;
+	border: 1px solid #eee;
+	line-height: 14px;
+	padding: 5px 10px;
+	margin: 0;
+	outline: none;
+
+	border-radius: 2px;
+	
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+
+	-webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+	transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.text-form:focus {
+	border-color: #2196F3;
+}
+
+.group > label {
+	margin-bottom: 3px;
+	display: block;
+	font-weight: 600;
+}
+
+.group {
+	margin-bottom: 10px;
+}
+
+.button {
+	padding: 5px 10px;
+	border-radius: 3px;
+	background-color: #1E88E5;
+	color: #FAFAFA;
+	border: 1px solid #0288D1;
+}
+.button.l-s {
+	padding: 10px 15px;
+}
+
+.button:not(.disabled):hover, .button:not(.disabled):active, .button:not(.disabled):focus {
+	cursor: pointer;
+	background-color: #0277BD;
+	outline: none;
+	border-color: #0277BD;
+}
+
+.button.disabled {
+	opacity: 0.65; 
+	cursor: not-allowed;
+}
+
+span.help {
+	font-size: 12px;
+	display: block;
+	color: #EEEEEE;
+}
+
+.notice {
+	background-color: #E0E0E0;
+	color: #000000;
+	padding: 5px 10px;
+	margin-bottom: 15px;
+	-webkit-box-shadow: 1px 2px 2px #212121;
+	box-shadow: 1px 2px 2px #212121;
+}
+
+.notice-info {
+	background-color: #2196F3;
+	color: #EEEEEE;
+}
+
+.notice-error {
+	background-color: #f44336;
+}
