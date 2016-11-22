@@ -101,6 +101,7 @@ span.help {
 	margin-bottom: 15px;
 	-webkit-box-shadow: 1px 2px 2px #212121;
 	box-shadow: 1px 2px 2px #212121;
+	border-radius: 3px;
 }
 
 .notice-info {
@@ -110,4 +111,10 @@ span.help {
 
 .notice-error {
 	background-color: #f44336;
+	color: #EEEEEE;
+}
+
+.notice-success {
+	background-color: #4caf50;
+	color: #EEEEEE;
 }

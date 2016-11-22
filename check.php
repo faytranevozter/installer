@@ -15,3 +15,5 @@ if (isset($_POST['host'])) {
 }
 
 echo json_encode($msg);
+
+sleep(2);

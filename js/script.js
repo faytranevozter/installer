@@ -1,13 +1,14 @@
 $(document).ready(function() {
+	var msg, allowStep2=false;
 	/* CHECK CONNECTION DATABASE */
-	$('#databaseForm').submit(function(){
+	$('#connectBtn').click(function(){
 		$.ajax({
-			url: $(this).attr('action'),
-			type: $(this).attr('method'),
-			data: $(this).serialize(),
+			url: $('#databaseForm').attr('action'),
+			type: $('#databaseForm').attr('method'),
+			data: $('#databaseForm').serialize(),
 			beforeSend: function() {
 				$('#connectBtn').addClass('disabled');
-				$('#InfoMessage').addClass('hide');
+				$('#InfoMessage').removeClass('notice-error notice-success hide').addClass('notice-info').text('Loading...');
 			},
 			dataType: 'json',
 			cache: false,
@@ -15,9 +16,21 @@ $(document).ready(function() {
 				$('#connectBtn').removeClass('disabled');
 				// alert(data);
 				if (data.success) {
-					alert('success');
+					allowStep2 = true;
+					$('#nextBtn').removeClass('disabled');
+					$('#InfoMessage').removeClass('notice-error notice-info').addClass('notice-success').text('Success');
 				} else {
-					$('#InfoMessage').removeClass('hide').text(data.error.msg);
+					if(data.error.code==1049) { 
+						msg = data.error.msg;
+					} else if(data.error.code==1045) {
+						msg = "Wrong Username or Password";
+					} else if(data.error.code==2002) {
+						msg = "Name or service host not known";
+					} else {
+						msg = "Unknown Error.";
+					}
+					$('#InfoMessage').addClass('notice-error').removeClass('notice-info notice-success');
+					$('#InfoMessage').removeClass('hide').html("<strong>Error :</strong> <br>" + msg);
 					// alert(data.error.code + ' = ' + data.error.msg);
 				}
 
@@ -30,4 +43,10 @@ $(document).ready(function() {
 		});
 		return false;
 	});	
+
+	$('#databaseForm').submit(function(){
+		if (!allowStep2) {
+			return false;
+		}
+	});
 });
