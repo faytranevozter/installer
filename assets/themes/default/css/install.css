@@ -61,6 +61,11 @@ html, body {
 	font-weight: 600;
 }
 
+label.checkbox {
+    font-weight: normal;
+    font-size: 14px;
+}
+
 .group {
 	margin-bottom: 10px;
 }
@@ -71,9 +76,28 @@ html, body {
 	background-color: #1E88E5;
 	color: #FAFAFA;
 	border: 1px solid #0288D1;
+	text-decoration: none;
+	display: inline-block;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
 }
 .button.l-s {
-	padding: 10px 15px;
+	padding: 6px 15px;
+	font-size: 12px;
+	line-height: 1.5;
 }
 
 .button:not(.disabled):hover, .button:not(.disabled):active, .button:not(.disabled):focus {
@@ -84,8 +108,10 @@ html, body {
 }
 
 .button.disabled {
+	outline: none;
 	opacity: 0.65; 
 	cursor: not-allowed;
+	pointer-events: none;
 }
 
 span.help {
@@ -117,4 +143,10 @@ span.help {
 .notice-success {
 	background-color: #4caf50;
 	color: #EEEEEE;
+}
+
+h1.step-title {
+	margin: 0 0 10px;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #424242;
 }

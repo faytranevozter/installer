@@ -14,6 +14,12 @@ define('STEP_PATH', INS_PATH.$step_dir.'/');
 
 require_once(INS_PATH.'system/Common.php');
 
+// var_dump(getConfig('session'));
+$sess_key = getConfig('session');
+if ($sess_key !== FALSE) {
+	session_start($sess_key);
+}
+
 $control =& loadClass('Core','system');
 
 function &get_instance()
@@ -33,5 +39,6 @@ $GO = new $control->route_class_name();
 if ( ! method_exists($GO, $control->route_method_name)) {
 	die("Method {$control->route_method_name} not exists.");
 }
+
 
 call_user_func_array(array(&$GO, $control->route_method_name), $control->route_params);

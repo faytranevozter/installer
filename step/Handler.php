@@ -5,9 +5,9 @@
 class Handler extends Core
 {
 	
-	function __construct()
+	function first_landing()
 	{
-		# code...
+		redirect('first');
 	}
 
 	function index()

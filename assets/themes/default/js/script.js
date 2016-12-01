@@ -1,14 +1,20 @@
 $(document).ready(function() {
 	var msg, allowStep2=false;
+	/* DISABLE CLICK "DISABLED" CLASS */
+	$('body').on('click', 'a.disabled', function(e) {
+		e.preventDefault();
+		return false;
+	});
+
 	/* CHECK CONNECTION DATABASE */
 	$('#connectBtn').click(function(){
 		$.ajax({
-			url: $('#databaseForm').attr('action'),
+			url: $('#databaseForm').attr('connect-action'),
 			type: $('#databaseForm').attr('method'),
 			data: $('#databaseForm').serialize(),
 			beforeSend: function() {
 				$('#connectBtn').addClass('disabled');
-				$('#InfoMessage').removeClass('notice-error notice-success hide').addClass('notice-info').text('Loading...');
+				$('#InfoMessage').removeClass('notice-error notice-success').addClass('notice-info').text('Loading...').fadeIn(500);
 			},
 			dataType: 'json',
 			cache: false,
@@ -20,17 +26,11 @@ $(document).ready(function() {
 					$('#nextBtn').removeClass('disabled');
 					$('#InfoMessage').removeClass('notice-error notice-info').addClass('notice-success').text('Success');
 				} else {
-					if(data.error.code==1049) { 
-						msg = data.error.msg;
-					} else if(data.error.code==1045) {
-						msg = "Wrong Username or Password";
-					} else if(data.error.code==2002) {
-						msg = "Name or service host not known";
-					} else {
-						msg = "Unknown Error.";
-					}
+					msg = data.error.msg;
 					$('#InfoMessage').addClass('notice-error').removeClass('notice-info notice-success');
-					$('#InfoMessage').removeClass('hide').html("<strong>Error :</strong> <br>" + msg);
+					$('#InfoMessage').fadeIn(500, function(){
+						$('#InfoMessage').html("<strong>Error :</strong> <br>" + msg);
+					});
 					// alert(data.error.code + ' = ' + data.error.msg);
 				}
 
@@ -43,6 +43,12 @@ $(document).ready(function() {
 		});
 		return false;
 	});	
+
+	$('#host, #user, #password, #database').keydown(function(){
+		allowStep2 = false;
+		$('#nextBtn').addClass('disabled');
+		$('#InfoMessage').fadeOut(500);
+	});
 
 	$('#databaseForm').submit(function(){
 		if (!allowStep2) {

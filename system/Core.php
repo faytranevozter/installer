@@ -1,5 +1,4 @@
 <?php 
-
 /**
 * Core Class Installer
 * @author 		Fahrur Rifai <faimaknyus@gmail.com>
@@ -63,7 +62,35 @@ class Core
 		$this->_init_uri();
 	}
 
-	protected function load($_file, $_data=array(), $_return=FALSE, $_def_ext='.php')
+	public static function &get_instance()
+	{
+		return self::$instance;
+	}
+
+	protected function load_class($class_name, $alias=FALSE)
+	{
+
+		if (strpos($class_name, '/') === FALSE) {
+			$folder = '';
+		} else {
+			$arr_path = explode('/', $class_name);
+			$class_name = array_pop($arr_path);
+			$folder = implode('/', $arr_path);
+		}
+
+		$class_name_lower = strtolower($class_name);
+		$class_name_uc = ucfirst($class_name);
+
+		if ($alias) {
+			$object = $alias;
+		} else {
+			$object = $class_name_lower;
+		}
+
+		$this->{$object} =& loadClass($class_name_uc, $folder); 
+	}
+
+	public function load($_file, $_data=array(), $_return=FALSE, $_def_ext='.php')
 	{
 		// is file exists
 		$ext = pathinfo(INS_PATH . $_file, PATHINFO_EXTENSION);
@@ -72,10 +99,6 @@ class Core
 		if ( ! file_exists($file_path))
 		{
 			die('Unable to load the requested file: '.$_file);
-		}
-		else
-		{
-			include($file_path);
 		}
 
 		/*
@@ -106,6 +129,11 @@ class Core
 		 */
 		ob_start();
 
+		/**
+		 * Load the file
+		 */
+		include($file_path);
+
 		// Return the file data if requested
 		if ($_return === TRUE)
 		{
@@ -129,8 +157,9 @@ class Core
 		}
 		else
 		{
-			echo ob_get_contents();
+			$cont = ob_get_contents();
 			@ob_end_clean();
+			echo $cont;
 		}
 
 		return $this;
